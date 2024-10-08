@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Developer Studio generated include file.
-// Used by Function Publisher.rc
+// Used by FP.rc
 //
 
 

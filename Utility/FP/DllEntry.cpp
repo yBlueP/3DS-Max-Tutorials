@@ -10,9 +10,9 @@
 // AUTHOR: 
 //***************************************************************************/
 
-#include "Function Publisher.h"
+#include "FP.h"
 
-extern ClassDesc2* GetFunctionPublisherDesc();
+extern ClassDesc2* GetFPDesc();
 
 HINSTANCE hInstance;
 int controlsInit = FALSE;
@@ -55,7 +55,7 @@ __declspec( dllexport ) ClassDesc* LibClassDesc(int i)
 {
 	switch(i)
 	{
-		case 0: return GetFunctionPublisherDesc();
+		case 0: return GetFPDesc();
 		default: return 0;
 	}
 }

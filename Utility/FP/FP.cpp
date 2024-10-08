@@ -10,16 +10,16 @@
 // AUTHOR: 
 //***************************************************************************/
 
-#include "Function Publisher.h"
+#include "FP.h"
 
 
-#define FunctionPublisher_CLASS_ID Class_ID(0xa4fc1921, 0x767648f7)
+#define FP_CLASS_ID Class_ID(0xd2b649f4, 0x507ad822)
 
-class FunctionPublisher : public UtilityObj{
+class FP : public UtilityObj{
 public:
 	// Constructor/Destructor
-	FunctionPublisher();
-	virtual ~FunctionPublisher();
+	FP();
+	virtual ~FP();
 
 	void DeleteThis() override {}
 
@@ -30,10 +30,10 @@ public:
 	virtual void Destroy(HWND hWnd);
 
 	// Singleton access
-	static FunctionPublisher* GetInstance()
+	static FP* GetInstance()
 	{
-		static FunctionPublisher theFunctionPublisher;
-		return &theFunctionPublisher;
+		static FP theFP;
+		return &theFP;
 	}
 
 private:
@@ -44,78 +44,78 @@ private:
 };
 
 
-class FunctionPublisherClassDesc : public ClassDesc2 
+class FPClassDesc : public ClassDesc2 
 {
 public:
 	int           IsPublic() override                               { return TRUE; }
-	void*         Create(BOOL /*loading = FALSE*/) override         { return FunctionPublisher::GetInstance(); }
+	void*         Create(BOOL /*loading = FALSE*/) override         { return FP::GetInstance(); }
 	const TCHAR*  ClassName() override                              { return GetString(IDS_CLASS_NAME); }
-	const TCHAR*  NonLocalizedClassName() override                  { return _T("FunctionPublisher"); }
+	const TCHAR*  NonLocalizedClassName() override                  { return _T("FP"); }
 	SClass_ID     SuperClassID() override                           { return UTILITY_CLASS_ID; }
-	Class_ID      ClassID() override                                { return FunctionPublisher_CLASS_ID; }
+	Class_ID      ClassID() override                                { return FP_CLASS_ID; }
 	const TCHAR*  Category() override                               { return GetString(IDS_CATEGORY); }
 
-	const TCHAR*  InternalName() override                           { return _T("FunctionPublisher"); } // Returns fixed parsable name (scripter-visible name)
+	const TCHAR*  InternalName() override                           { return _T("FP"); } // Returns fixed parsable name (scripter-visible name)
 	HINSTANCE     HInstance() override                              { return hInstance; } // Returns owning module handle
 
 
 };
 
-ClassDesc2* GetFunctionPublisherDesc()
+ClassDesc2* GetFPDesc()
 {
-	static FunctionPublisherClassDesc FunctionPublisherDesc;
-	return &FunctionPublisherDesc; 
+	static FPClassDesc FPDesc;
+	return &FPDesc; 
 }
 
 
 
 
-//--- FunctionPublisher -------------------------------------------------------
-FunctionPublisher::FunctionPublisher()
+//--- FP -------------------------------------------------------
+FP::FP()
 	: iu(nullptr)
 	, hPanel(nullptr)
 {
 
 }
 
-FunctionPublisher::~FunctionPublisher()
+FP::~FP()
 {
 
 }
 
-void FunctionPublisher::BeginEditParams(Interface* ip,IUtil* iu)
+void FP::BeginEditParams(Interface* ip,IUtil* iu)
 {
 	this->iu = iu;
 	hPanel = ip->AddRollupPage(hInstance, MAKEINTRESOURCE(IDD_PANEL), DlgProc, GetString(IDS_PARAMS), 0);
 }
 
-void FunctionPublisher::EndEditParams(Interface* ip, IUtil*)
+void FP::EndEditParams(Interface* ip, IUtil*)
 {
 	this->iu = nullptr;
 	ip -> DeleteRollupPage(hPanel);
 	hPanel = nullptr;
 }
 
-void FunctionPublisher::Init(HWND /*handle*/)
+void FP::Init(HWND /*handle*/)
 {
 
 }
 
-void FunctionPublisher::Destroy(HWND /*handle*/)
+void FP::Destroy(HWND /*handle*/)
 {
 
 }
 
-INT_PTR CALLBACK FunctionPublisher::DlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK FP::DlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
 	{
 	case WM_INITDIALOG:
-		 FunctionPublisher::GetInstance() -> Init(hWnd);
+		 FP::GetInstance() -> Init(hWnd);
 		break;
 
 	case WM_DESTROY:
-		 FunctionPublisher::GetInstance() -> Destroy(hWnd);
+		 FP::GetInstance() -> Destroy(hWnd);
 		break;
 
 	case WM_COMMAND:

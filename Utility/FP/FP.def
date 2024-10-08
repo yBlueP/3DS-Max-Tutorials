@@ -1,4 +1,4 @@
-LIBRARY Function Publisher.dlu
+LIBRARY FP.dlu
 EXPORTS
    LibDescription       @1       PRIVATE
    LibNumberClasses     @2       PRIVATE

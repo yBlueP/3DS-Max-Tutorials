@@ -99,7 +99,7 @@ STRINGTABLE DISCARDABLE
 BEGIN
     IDS_LIBDESCRIPTION      ""
     IDS_CATEGORY            ""
-    IDS_CLASS_NAME          "FunctionPublisher"
+    IDS_CLASS_NAME          "FP"
     IDS_PARAMS              "Parameters"
     IDS_SPIN                "Spin"
  //TEX_TYPE
